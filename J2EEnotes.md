@@ -905,7 +905,170 @@ Java EE
       }
       ```
 
-      
+
+## 2020/3/16 20:00
+
+1. 复习
+
+   * 日期和日历类
+
+   * `Calendar cal=Calendar.getInstance();`
+
+     ```java
+     public class MyCalendar {
+         private static MyCalendar cal = null;
+     
+         public static MyCalendar getInstance() {
+             if (cal == null)
+                 cal= new MyCalendar();
+             return cal;
+         }
+         
+         @Test
+         public void MyCalendarTest() {
+             //单例模式
+             MyCalendar cal1 = MyCalendar.getInstance();
+             MyCalendar cal2 = MyCalendar.getInstance();
+             System.out.println(cal1==cal2);//true
+         }
+     }
+     ```
+
+   * set(part,value)
+
+2. Java集合框架
+
+   1. 数据存储结构
+
+      * 缓存中存储  数据结构=内存数据结构+算法
+
+      * 持久化存储  文件；数据库技术
+
+      * 几种主要形式
+
+        * 顺序存储：数据在内存中是按照某种顺序存储。元素存储空间上是连续的。
+
+          * ```java
+            int[] x = new int[100]; //开辟100*4空间，
+            x[10] = 45
+            ```
+
+          * 不利于元素增加，删除，移动等操作
+
+          * ArrayList 动态改变存储空间，顺序存储结构；看成一个动态数组
+
+            * ```java
+              ArrayList list = new ArrayList();
+              list.add(元素)；
+              ```
+
+        * 链式存储
+
+          * LinkedLIst
+
+        * 哈希存储
+
+          * 每个元素存储位置由"元素值+Hash算法"来确定。
+          * HashSet 元素值相同，存储空间相同，值不同则存储空间不同；没有重复值。
+
+        * Map存储
+
+          * 元素由key+value构成，存储位置由Key决定；查找元素值依据Key；key与value构成Map。
+
+      * 集合框架：由系列接口与类构成Java集合
+
+        * ```mermaid
+          graph TB
+          A[Colletion]-->B[Set]
+          A-->C[List]
+          B-->D[HashSet]
+          B-->E[TreeSet]
+          C-->F[LinkedList]
+          C-->G[ArrayList]
+          ```
+
+        * 增加、移除、查找等基本操作
+
+   2. HashSet
+
+      * `HashSet hs = new HashSet();`//集合可以存储任意实例，任意元素实例
+      * 实际编程中，集合用来存储某一种数据类型
+      * `HashSet<Student> hs = new HashSet();`
+
+   3. ArrayList
+
+      * 动态数组，顺序存储
+
+      * ```java
+        //速度对比
+        @Test
+        public void test2() {
+            HashSet<Integer> hs=new HashSet<Integer>();
+            long l1=System.currentTimeMillis();
+            for (int i=1;i<=1000000;i++){
+                hs.add(new Integer(i));
+            }
+            long l2=System.currentTimeMillis();
+            System.out.println(l2-l1);
+        
+            ArrayList<Integer> list =new ArrayList<Integer>();
+            long l3=System.currentTimeMillis();
+            for (int i=1;i<=1000000;i++){
+                list.add(new Integer(i));
+            }
+            long l4=System.currentTimeMillis();
+            System.out.println(l4-l3);
+        }
+        
+        ```
+
+   4. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
