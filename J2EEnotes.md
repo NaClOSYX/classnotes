@@ -695,7 +695,7 @@ CSS是*Cascading Style Sheets*的缩写，即层叠样式表
 
 # 课堂笔记
 
-## 2020/3/2 20:00
+## 第一次课
 
 Java EE
 
@@ -739,7 +739,7 @@ Java EE
 
    Web服务器 Tomcat 9.0 下载压缩版，解压之后就可以使用呢
 
-## 2020/3/9 20:00
+## 第二次课
 
 **常用工具类的使用**
 
@@ -906,7 +906,7 @@ Java EE
       ```
 
 
-## 2020/3/16 20:00
+## 第三/四次课
 
 1. 复习
 
@@ -1022,26 +1022,118 @@ Java EE
         
         ```
 
-   4. 
+      * e.g.:
 
+      * ```java
+        HashSet<Integer> hs=new HashSet<Integer>();
+        hs.add(1);,...hs.add(1000);
+        hs.remove(100);//移除值为100这个Interger元素，无法按照索引移除元素
+        
+        List<Integer> ls=new ArrayList<Integer>();
+        ls.add(1);,...ls.add(1000);
+        ls.remove(1);//移除第二个元素，按索引移除
+        ls.remove(new Integer(1));
+        //
+        for(int i=0;i<10000;i++)
+            ls.remove(i);//移动次数多
+        ```
 
+   4. TreeSet：有序平衡二叉树（存储结构）
 
+      * 按照某种指定排序算法对元素进行排序；
 
+      * `TreeSet<Integer> ts=new TreeSet<Integer>();//如果没有指定算法，按照默认排序算法`
 
+      * ```java
+        public class MyCmp implements Comparator<Student> {
+            public int compare(Student s1, Student s2) {
+                int diffScore=s2.getScore()-s1.getScore();
+                if(diffScore==0)
+                    return -s1.getName().compareTo(s2.getName());
+                return diffScore;
+            }
+        }
+        ```
 
+      * `````java
+        //匿名类
+        TreeSet<Student> ts=new TreeSet<Student>(new Comparator<Student>() {
+            public int compare(Student s1, Student s2) {
+                int diffScore=s2.getScore()-s1.getScore();
+                if(diffScore==0)
+                    return -s1.getName().compareTo(s2.getName());
+                return diffScore;
+            }
+        });
+        ```
 
+      * ```java
+        //让学生类变成可以比较
+        public class Student implements Comparable<Student> {
+            ...
+            public int compareTo(Student s) {
+                int diffScore=s.getScore()-this.getScore();
+                if(diffScore==0)
+                    return -this.getName().compareTo(s.getName());
+                return diffScore;
+            }
+            ...
+        }
+        ```
 
+      * 
 
+   5. LinkedList：双向循环链表形式存储元素
 
+   6. HashMap集合
 
+      * 每个元素由key与value构成，依据key确定存储位置，查找元素的值，key---Map---value
 
+      * ```java
+        Map<Integer,Student> hm=new HashMap<Integer, Student>();
+        ```
 
+      * HTML5 (key,value)///(email,name)
 
+      * ```java
+                Map<Integer,String> hm=new HashMap<Integer, String>();
+                hm.put(new Integer(1),"zhang");
+                hm.put(new Integer(2),"li");
+                hm.put(new Integer(3),"wang");
+                hm.put(new Integer(2),"lou");
+                /*首先找出key集合，迭代keys，依据每个key,查找元素的value*/
+                Set<Integer> keys=hm.keySet();
+                Iterator<Integer> it = keys.iterator();
+                while (it.hasNext()){
+                    Integer key=it.next();
+                    String value=hm.get(key);
+                    System.out.println(key+"  "+value);
+                }
+        ```
 
+   7. TreeMap
 
+      * 每个元素由key与value构成，依据key确定存储位置，查找元素的值；基于key平衡二叉树结构
 
+   8. 栈、队列、向量
 
+      * Stack,Queue,Vector;
 
+      * ```java
+        public List<Student> queryAllStudents(){
+            List<Student> slist=new ArrayList<Student>;
+            ...
+            slist.add(s); //JDBC操作
+            return slist;
+        }
+        ```
+
+      Java JDBC操作
+
+      1. 安装MySQL 5.5,5.6,...,8.5
+      2. 复习基本sql
+
+      
 
 
 
