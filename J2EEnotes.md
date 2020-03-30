@@ -1133,39 +1133,143 @@ Java EE
       1. 安装MySQL 5.5,5.6,...,8.5
       2. 复习基本sql
 
-      
 
+## 第五次课
 
+1. MySQL编程基本步骤（SQLServer,Oracle等）
 
+   1. 加载驱动（数据库访问驱动程序jar形式）
 
+      mysql-connector-java
 
+      ```java
+      String driver="com.mysql.jdbc.Driver";
+      Class.forName(driver);//加载驱动程序
+      ```
 
+   2. 创建连接Connection
 
+      JDBC：Sun制定的一套开发数据库的统一规范，接口，各个数据库开发者（公司）；基于JDBC规范实现
 
+      ```java
+      String url="jdbc:mysql://localhost:3306/j2eeclass";
+      String dbuser="root";
+      String dbpwd="root";
+      Connection conn= DriverManager.getConnection(url,dbuser,dbpwd);
+      ```
 
+   3. 发送SQL命令，执行SQL命令
 
+      ```java
+      Statement cmd=conn.createStatement();
+      String sql = "select * from test";
+      ```
 
+   4. 执行SQL命令，返回结果集ResultSet
 
+      ```java
+      ResultSet rs = cmd.executeQuery(sql);
+      ```
 
+   5. 读取结果集中的数据
 
+      ```java
+      while (rs.next()) {
+          int id = rs.getInt(1);
+          String name = rs.getString(2);
+          String password = rs.getString(3);
+          System.out.println(id + name + password);
+      }
+      ```
 
+   6. 关闭连接
 
+      ```java
+      conn.close();
+      ```
 
+2. 执行insert,update,delete,create等cuid语句，写数据库或更新数据库
 
+   ```java
+   String sql = "delete from test where id = 1";
+   int x=cmd.executeUpdate(sql);
+   ```
 
+3. 带参数SQL语句
 
+   ```java
+   public int addUser(int id,String name,String password) throws Exception {
+       String driver="com.mysql.jdbc.Driver";
+       Class.forName(driver);//加载驱动程序
+       String url="jdbc:mysql://localhost:3306/j2eeclass";
+       String dbuser="root";
+       String dbpwd="root";
+       Connection conn= DriverManager.getConnection(url,dbuser,dbpwd);
+       Statement cmd=conn.createStatement();
+       String sql="insert into test values("+"id"+","+name+","+password+")";
+       int x=cmd.executeUpdate(sql);
+       conn.close();
+       return x;
+   }
+   ```
 
+   ```java
+   public int addUser(int id,String name,String password) throws Exception {
+       String driver="com.mysql.jdbc.Driver";
+       Class.forName(driver);//加载驱动程序
+       String url="jdbc:mysql://localhost:3306/j2eeclass";
+       String dbuser="root";
+       String dbpwd="root";
+       Connection conn= DriverManager.getConnection(url,dbuser,dbpwd);
+       String sql="insert into test values(?,?,?)";
+       PreparedStatement pcmd=conn.prepareStatement(sql);
+       pcmd.setInt(1,id);
+       pcmd.setString(1,name);
+       pcmd.setString(1,password);
+       int x=pcmd.executeUpdate();
+       conn.close();
+       return x;
+   }
+   ```
 
+   * 批量导入，使用带参数SQL语句效率更高；
+   * 可读性高；
+   * 提高安全性，SQL注入
+     * `String sql="select count(*) from users where uid='@uid' and upwd='@upwd'";//1`
+     * `String sql="select count(*) from users where uid='admin' or '1'='1' and upwd='@upwd'";//1`
+   * 
 
+4. 数据库编程分层设计
 
+   * CustomerDao 数据库访问类Bean，包含对于表Customers的相关操作
 
+   * Customer 实体类：映射数据库中某个表Customer ，Entity
 
+     * ```sql
+       create table customers(
+       	cid varchar(20) not null primary key,
+           cname varchar(30),
+           cphone varchar(30)
+       )
+       ```
 
+     * ```java
+       public class Customer(){
+           private String id,name,phone;
+           //构造函数
+           //getter-setter函数
+       }
+       ```
 
+       
 
+     * 
 
+   * ss
 
+   
 
+5. sa
 
 
 
