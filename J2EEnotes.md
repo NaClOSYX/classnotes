@@ -1134,7 +1134,7 @@ Java EE
       2. 复习基本sql
 
 
-## 第五次课
+## 第五/六次课
 
 1. MySQL编程基本步骤（SQLServer,Oracle等）
 
@@ -1237,8 +1237,7 @@ Java EE
    * 提高安全性，SQL注入
      * `String sql="select count(*) from users where uid='@uid' and upwd='@upwd'";//1`
      * `String sql="select count(*) from users where uid='admin' or '1'='1' and upwd='@upwd'";//1`
-   * 
-
+   
 4. 数据库编程分层设计
 
    * CustomerDao 数据库访问类Bean，包含对于表Customers的相关操作
@@ -1261,16 +1260,129 @@ Java EE
        }
        ```
 
-       
+5. 分层访问技术
 
-     * 
+   1. 实体层
 
-   * ss
+      * 构建实体类：映射数据库中表
+
+   2. 操作（Service）层
+
+      * 根据实际业务来定义其中函数 DAO
+
+   3. 构建访问数据库工具类SQLHelper
+
+      * 函数带有可变参数
+
+      * ```java
+        public int fun(int... num){
+        }
+        fun(1,2,3);
+        fun(2);
+        fun(1,2,3,4);
+        ```
+
+6. 如何调用存储过程
+
+   ```sql
+   create proc MyProc
+   begin
+   ...
+   end
+   ```
+
+7. 事务处理
+
+   * 单个数据库事务
+
+   * 跨数据库事务
+
+
+
+## 第七次课
+
+HTML及JSP开发
+
+1. 基于B/S架构程序
+
+   C/S架构
+
+2. B/S运行流程
+
+   第一步：在浏览器（客户端）输入URL
+
+   ​		http://localhost:8080/
+
+   第二步：服务器端收到客户端浏览器发来的URL请求，查找定位到url所请求资源，物理位置
+
+   ​		服务器必须安装web服务器，并运行web服务器
+
+   ​		Tomcat,IIS,...
+
+   第三步：如果定位到资源（网页，图片，文件）物理位置
+
+   1. 如果是静态资源：HTML网页，图片，视频，音频，图形等；
+
+      HTML代码能够在浏览器解释执行
+
+   2. 如果是动态网页（包含有服务器执行脚本代码 JSP,PHP,）
+
+      ```JSP
+      <%
+          for (int i = 0; i <= 10; i++)
+              out.println("<h1>" + i + "</h1>");
+      %>
+      ```
+
+      首先在服务器编译执行脚本代码，执行后将结果以HTML源代码格式发送到客户端浏览器
+
+      HTML代码能够在客户端浏览器解释执行，呈现效果
+
+   3. SSS
+
+3. Eclipse新建web项目
+
+   ```HTML
+   <!DOCTYPE html>
+   <html lang="en">
+   <head>
+       <meta charset="UTF-8">
+       <title>Hello Html</title>
+   </head>
+   <body>
+   <h1>Hello HTML5</h1>
+   </body>
+   </html>
+   ```
+
+   ```jsp
+   <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+   <!DOCTYPE html>
+   <html>
+   <head>
+       <title>Hello JSP</title>
+   </head>
+   <body>
+       <h1>1到10的阶乘</h1>
+       <%
+           int s=1;
+           for (int i = 1; i < 10; i++) {
+               s*=i;
+               out.print("<h2>"+i+"!="+s+"</h2>");
+           }
+       %>
+   </body>
+   </html>
+   ```
+
+   web项目部署到web服务器才能运行
 
    
 
-5. sa
+4. HTML、CSS、JavaScript
 
+   1. HTML5 Bootstrap
+   2. CSS3
+   3. JavaScript及其开源 React.js, Jquery, Vue.js,Node.js
 
-
-
+5. sss
